@@ -65,10 +65,10 @@ class NotchFiltered:
             file_name = os.path.split(file)
             print(file_name[0])
             print(file_name[1])
-            if not os.path.exists(file_name[0] + '/Noise/'):
-                os.makedirs(file_name[0] + '/Noise/')
-            sf.write(file_name[0] + '/Noise/' + os.path.splitext(file_name[1])[0] +
-                     '.wav', output_signal, sr, 'PCM_24')
+            if not os.path.exists(file_name[0]):
+                os.makedirs(file_name[0])
+            sf.write(file_name[0] + os.path.splitext(file_name[1])[0] +
+                     '_notched.wav', output_signal, sr, 'PCM_24')
 
 
 # Class  NotchFiltered arguments are: directory path, list of frequencies to create notched filters
