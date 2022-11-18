@@ -63,11 +63,7 @@ class NotchFiltered:
 
             # Write to wav the signal_noise value
             file_name = os.path.split(file)
-            print(file_name[0])
-            print(file_name[1])
-            if not os.path.exists(file_name[0]):
-                os.makedirs(file_name[0])
-            sf.write(file_name[0] + os.path.splitext(file_name[1])[0] +
+            sf.write(file_name[0] + '/' + os.path.splitext(file_name[1])[0] +
                      '_notched.wav', output_signal, sr, 'PCM_24')
 
 

@@ -5,7 +5,7 @@ import soundfile as sf
 from functools import reduce
 
 
-class Add_noise:
+class AddNoise:
     def __init__(self, dir_path, min_freq, max_freq):
         self.dir_path = dir_path
         self.min_freq = min_freq
@@ -47,14 +47,10 @@ class Add_noise:
 
             # Write to wav the signal_noise value
             file_name = os.path.split(file)
-            print(file_name[0])
-            print(file_name[1])
-            if not os.path.exists(file_name[0]):
-                os.makedirs(file_name[0])
-            sf.write(file_name[0] + os.path.splitext(file_name[1])[0] +
+            sf.write(file_name[0] + '/' + os.path.splitext(file_name[1])[0] +
                      '_noise.wav', signal_noise, sr, 'PCM_24')
 
 
-add_noise = Add_noise('/Users/Wiking/Desktop/LibriSpeech', 50, 800)
+add_noise = AddNoise('/Users/Wiking/Desktop/LibriSpeech', 50, 800)
 add_noise.files_list()
 add_noise.add_noise_to_file()
