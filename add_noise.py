@@ -36,10 +36,6 @@ class AddNoise:
         files = self.files_list()
         for file in files:
             signal, sr = sf.read(file)
-
-            print(len(signal))
-            print(sr)
-
             noise = self.band_limited_noise(sr, samples=len(signal))
 
             # adjustment the noise to the maximum amplitude of signal
@@ -47,8 +43,12 @@ class AddNoise:
 
             # Write to wav the signal_noise value
             file_name = os.path.split(file)
-            sf.write(file_name[0] + '/' + os.path.splitext(file_name[1])[0] +
-                     '_noise.wav', signal_noise, sr, 'PCM_24')
+            if file.endswith('.wav'):
+                pass
+            else:
+                sf.write(file_name[0] + '/' + os.path.splitext(file_name[1])[0] +
+                         '_noise.wav', signal_noise, sr, 'PCM_24')
+                print('File saved as: ', os.path.splitext(file_name[1])[0], '_noise.wav')
 
 
 add_noise = AddNoise('/Users/Wiking/Desktop/LibriSpeech', 50, 800)

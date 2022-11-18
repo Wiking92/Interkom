@@ -38,9 +38,6 @@ class NotchFiltered:
             output_signal, sr = sf.read(file)
             original_signal, sr = sf.read(file)
 
-            print(len(output_signal))
-            print(sr)
-
             # Creating additive gaussian white noise
             rms = math.sqrt(np.mean(original_signal ** 2))
             original_noise = np.random.normal(0, rms, original_signal.shape[0])
@@ -63,8 +60,12 @@ class NotchFiltered:
 
             # Write to wav the signal_noise value
             file_name = os.path.split(file)
-            sf.write(file_name[0] + '/' + os.path.splitext(file_name[1])[0] +
-                     '_notched.wav', output_signal, sr, 'PCM_24')
+            if file.endswith('.wav'):
+                pass
+            else:
+                sf.write(file_name[0] + '/' + os.path.splitext(file_name[1])[0] +
+                         '_notched.wav', output_signal, sr, 'PCM_24')
+                print('File saved: ', os.path.splitext(file_name[1])[0], '_notched.wav')
 
 
 # Class  NotchFiltered arguments are: directory path, list of frequencies to create notched filters
